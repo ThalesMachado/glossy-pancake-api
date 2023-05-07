@@ -4,6 +4,7 @@ import java.security.SecureRandom
 import kotlin.byteArrayOf
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.SecretKeyFactory
+import java.util.Arrays
 
 import com.example.glossypancake.models.UserPassword
 import com.example.glossypancake.models.UserLogin
@@ -28,7 +29,7 @@ class PassportController {
         val hash = factory.generateSecret(spec).getEncoded();
 
         var accessControl: AccessControl
-        if(hash == userPassword.hash){
+        if(Arrays.equals(hash, userPassword.hash)){
             accessControl = AccessControl("acessHash", true)
         } else {
             accessControl = AccessControl("", false)
